@@ -1,0 +1,175 @@
+%%-----------------------------------------------------------------------
+% O argumento chapter=TITLE define que todos os títulos de capítulos
+% saiam em caixa alta (maiúsculas). Se não quiser caixa alta, basta
+% remover este argumento.
+%\documentclass[12pt,oneside,a4paper,chapter=TITLE,
+			  %english,brazil]{abntex2}
+
+%\documentclass[12pt,oneside,a4paper,chapter=TITLE]{abntex2}
+
+
+%\documentclass[12pt,oneside,a4paper,chapter=TITLE]{abntex2}
+%%-----------------------------------------------------------------------
+% Carregando a padronização para a capa, contra-capa e folha de
+% assinaturas adotada pela UEPB
+\usepackage{TCC_UEPB}
+\usepackage{graphicx}
+\usepackage{sectsty}
+%\pagenumbering{arabic}
+%%-----------------------------------------------------------------------
+% Pacotes básicos 
+\usepackage{mathptmx}		% Usa a fonte Times New Roman
+\usepackage[T1]{fontenc}	% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}	% Cod. do doc. (conversão autom. dos acentos)
+\usepackage{lastpage}		% Usado pela Ficha catalográfica
+\usepackage{indentfirst}	% Indenta o primeiro parágrafo de cada seção.
+\usepackage{float}
+\usepackage{forest}
+\usepackage{color}			% Controle das cores
+\usepackage{graphicx}		% Inclusão de gráficos
+\usepackage{microtype} 		% para melhorias de justificação
+\usepackage{pdfpages}		% para a inclusão de documentos em PDF.
+\usepackage{multirow}       % VARIAS LINHAS NA TABELA
+\usepackage{colortbl}       % CORES NA TABELA
+\usepackage{hyperref}
+\usepackage{titlesec}
+%%------------------------------------------------------------------------
+% Pacotes adicionais, para definir ambientes para definição, teorema 
+% e axioma. Outros ambientes podem ser definidos da mesma forma...
+\usepackage{amssymb}     % qed
+\usepackage{amsthm}      % Teoremas
+\usepackage{amsmath}     % Para o ambiente align (alinhar equações)
+\usepackage{thmtools}    % Front end para amsthm (\declaretheorem)
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+%%-----------------------------------------------------------------------
+% Definição de ambientes para definição, teorema, etc...
+\declaretheorem[style=definition,name=Definição,qed=\textemdash]{definicao}
+\declaretheorem[style=plain,name=Teorema,qed=\textnormal{\textemdash}]{teorema}
+\declaretheorem[style=plain,name=Axioma,qed=\textnormal{\textemdash}]{axioma}
+\declaretheorem[style=plain,name=Lema,qed=\textnormal{\textemdash}]{lema}
+% Configuração para seções e subseções
+%\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% configurando seções 
+
+
+
+%%------------------------------------------------------------------------
+% Pacotes de citações
+\usepackage[brazilian,hyperpageref]{backref} % Página citada na bibliog.
+\usepackage[alf]{abntex2cite}				 % Citações padrão ABNT
+
+%\titlespacing{\chapter}{0pt}{*0}{*0}
+%\titlespacing{\section}{0pt}{*0}{*0}
+%%-----------------------------------------------------------------------
+%% CONFIGURAÇÕES DE PACOTES
+%%-----------------------------------------------------------------------
+
+\usepackage{fancyhdr}
+\usepackage[bottom=2cm,top=2cm]{geometry} % Ajusta as margens
+
+\pagestyle{plain} % Configura o estilo de página para plain
+
+\fancypagestyle{plain}{%
+  \fancyhf{} % Limpa todos os cabeçalhos e rodapés
+  \renewcommand{\headrulewidth}{0pt} % Remove a linha do cabeçalho
+  \fancyhead[R]{\raisebox{2cm}{\thepage}} % Ajusta a posição vertical (aumentado para -2cm)
+}
+%%-----------------------------------------------------------------------
+% Configurações do pacote backref Usado sem a opção hyperpageref
+% de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}   % Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+	Nenhuma citação no texto.%
+	\or
+	Citado na página #2.%
+	\else
+	Citado #1 vezes nas páginas #2.%
+	\fi}%
+
+
+%%----------------------------------------------------------------------
+% Configurações de aparência do PDF final
+\makeatletter
+\hypersetup{     % informações do PDF
+	pdftitle={\@title}, 
+	pdfauthor={\@author},
+	pdfsubject={\imprimirpreambulo},
+	colorlinks=true,   % false: box links; true: color links
+	linkcolor=black,   % color of internal links
+	citecolor=black,   % color of links to bibliography
+	filecolor=black,   % color of file links
+	urlcolor=black,    % color of url links
+	bookmarksdepth=4
+}
+\makeatother
+
+
+%%------------------------------------------------------------------
+% Cria uma nova série (de símbolos) para footnotes
+\newcounter{savefootnote}
+\newcounter{symfootnote}
+\newcommand{\symfootnote}[1]{%
+	\setcounter{savefootnote}{\value{footnote}}%
+	\setcounter{footnote}{\value{symfootnote}}%
+	\ifnum\value{footnote}>8\setcounter{footnote}{0}\fi%
+	\let\oldthefootnote=\thefootnote%
+	\renewcommand{\thefootnote}{\fnsymbol{footnote}}%
+	\footnote{#1}%
+	\let\thefootnote=\oldthefootnote%
+	\setcounter{symfootnote}{\value{footnote}}%
+	\setcounter{footnote}{\value{savefootnote}}%
+}
+
+
+% remove informações do  top das paginas 
+
+
+%\pagestyle{empty} 
+
+%%-----------------------------------------------------------------------
+% Informações de dados para CAPA, FOLHA DE ROSTO e FOLHA DE APROVAÇÃO
+\titulo{ PREDIÇÃO DA SÍNDROME RESPIRATÓRIA AGUDA GRAVE POR MEIO DE MULTICLASSIFICAÇÃO COM ALGORITMOS DE MACHINE LEARNING}   % Subtítulo apenas se houver
+\tituloestrangeiro{PREDICTION OF SEVERE ACUTE RESPIRATORY SYNDROME THROUGH MULTICLASSIFICATION USING MACHINE LEARNING ALGORITHMS} % Title (English - opcional)
+\autor{JOSEFERSON DA SILVA BARRETO}   % Digite seu nome aqui
+\local{Campina Grande - PB}
+\data{2023}                              % Na data coloque apenas o ano
+\orientador[Prof. Dr.]{%Ricardo Alves de Olinda & \\
+            Tiago Almeida de Oliveira} % Nome do orientador aqui
+%\coorientador[]{} % Coorientador (se tiver)
+
+%%-----------------------------------------------------------------------
+% Informações sobre campus, centro, depto e curso
+% \campus e \curso são obrigatórios e precisam ser preenchidos!!
+% Todos os demais são opcionais (para o LaTeX), pois note que o 
+% \preambulo é exigido pela Biblioteca na entrega do trabalho.
+\campus{Campus I - CAMPINA GRANDE}
+\centro{Centro de Ciências e Tecnologia}
+\depto{Departamento de Estatística}
+\curso{CURSO DE GRADUAÇÃO EM BACHARELADO EM ESTATÍSTICA}
+\tipotrabalho{Trabalho de Conclusão de Curso}
+\preambulo{
+  Trabalho de Conclusão de Curso apresentado ao curso de Bacharelado em Estatística do Departamento de Estatística do Centro de Ciências e Tecnologia da Universidade Estadual da Paraíba, como requisito parcial à obtenção do título de bacharel em Estatística.
+}
+
+
+%%-----------------------------------------------------------------------
+% compila o indice
+\makeindex
+
+\usepackage{pdfpages}
+
+%\pagestyle{plain}
+
+%%-----------------------------------------------------------------------
+%%      INÍCIO DO DOCUMENTO
+%%-----------------------------------------------------------------------
+
+\setlength{\absparsep}{18pt}

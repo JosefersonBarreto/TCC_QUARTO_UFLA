@@ -1,0 +1,409 @@
+---
+title: "PREDIÇÃO DA SÍNDROME RESPIRATÓRIA AGUDA GRAVE POR MEIO DE MULTICLASSIFICAÇÃO COM ALGORITMOS DE MACHINE LEARNING"
+# date: "`r format(Sys.Date(), '%d/%m/%Y')`"
+# date-align: low center
+format:
+  pdf:
+    include-in-header:
+      - text: |
+          \usepackage{scrhack} % Load KOMA-Script package
+          \usepackage{TCC_UEPB}
+          \usepackage[alf]{abntex2cite}
+documentclass: abntex2
+classoption:
+  - 12pt
+  - oneside
+  - a4paper
+  - chapter=TITLE
+  - english,brazil
+papersize: letter
+block-headings: true
+bibliography: bibliografias.bib 
+nocite: '@*'
+---
+
+\vspace{10cm}
+
+```{r,echo=FALSE}
+# Carrega o pacote tinytex
+# library(tinytex)
+# 
+# # Instala o pacote natbib
+# tlmgr_install("natbib")
+```
+
+<!-- Ajusta o espaçamento para centralizar o título verticalmente -->
+
+```{=latex}
+\begin{center} 
+\large{Data: 05/02/2024} \end{center}
+```
+\pagebreak
+
+<!-- %%----------------------------------------------------------------------- -->
+
+<!-- %                Dedicatória (OPCIONAL) -->
+
+<!-- % Comente as linhas abaixo se não quiser usar. -->
+
+```{=tex}
+\begin{dedicatoria}
+    \vspace*{\fill}
+    \hspace{.45\textwidth}
+    \begin{minipage}{.5\textwidth}
+        Dedico este trabalho a Deus, minha família, amigos e colegas que estiveram sempre juntos comigo durante toda minha jornada acadêmica.
+    \end{minipage}
+\end{dedicatoria}
+```
+\pagebreak
+
+<!-- %%----------------------------------------------------------------------- -->
+
+<!-- %              Agradecimentos (OPCIONAL) -->
+
+<!-- % Comente as linhas abaixo se não quiser usar.-->
+
+```{=tex}
+\begin{agradecimentos}
+Gostaria de expressar meu sincero agradecimento a todas as pessoas que contribuíram para a conclusão bem-sucedida deste trabalho de conclusão de curso. Neste momento especial, desejo expressar minha gratidão a Deus, minha família, amigos, colegas e meu orientador, além dos professores que estiveram ao meu lado durante essa jornada. Em primeiro lugar, agradeço a Deus por me conceder a força, a sabedoria e a perseverança necessárias para superar os desafios ao longo deste processo. Sua orientação e apoio constantes foram fundamentais para alcançar esse marco importante em minha vida acadêmica.
+
+À minha família, meu porto seguro, expresso minha profunda gratidão. O amor, o incentivo e o apoio incondicionais que recebi de meus pais, irmãos e outros familiares foram cruciais para me manter motivado e focado em meus objetivos. Vocês sempre acreditaram em mim e me encorajaram a nunca desistir, mesmo nos momentos mais difíceis. Sou imensamente grato por ter vocês ao meu lado. Aos meus amigos e colegas, sou grato por compartilharmos essa jornada acadêmica juntos. Agradeço por todas as trocas de conhecimento, apoio mútuo, estudo em grupo e momentos de descontração que compartilhamos ao longo dos anos. Vocês tornaram essa jornada mais leve e memorável. Sou grato pela amizade e pelo suporte inestimável que me proporcionaram.
+
+Ao meu orientador, expresso minha sincera gratidão pela sua orientação, conhecimento e dedicação ao longo do processo de desenvolvimento deste trabalho. Suas orientações valiosas, sugestões e críticas construtivas foram fundamentais para moldar este projeto. Agradeço por ter compartilhado seu tempo, conhecimento e experiência comigo. Sou imensamente grato pela sua paciência e pela confiança que depositou em meu trabalho.
+
+Também quero estender meu agradecimento a todos os professores que contribuíram para a minha formação acadêmica. Suas aulas, orientações e ensinamentos foram fundamentais para meu crescimento intelectual e profissional. Sou grato por ter tido a oportunidade de aprender com profissionais tão dedicados e experientes.
+
+Por fim, gostaria de expressar minha gratidão a todos aqueles que, de alguma forma, contribuíram para o meu sucesso nesta jornada. Seja através de palavras de encorajamento, apoio emocional ou assistência prática, cada gesto foi importante e significativo.Este trabalho não teria sido possível sem a presença de todas essas pessoas especiais em minha vida. Agradeço do fundo do coração por todo o apoio, incentivo e confiança que recebi ao longo dessa jornada. Sinto-me verdadeiramente abençoado por ter cada um de vocês ao meu lado. O meu mais sincero obrigado a Deus, à minha família, amigos, colegas, orientador e professores. Vocês foram essenciais para a minha conquista acadêmica e sou eternamente grato por tudo o que fizeram por mim.
+\end{agradecimentos}
+```
+<!-- %%----------------------------------------------------------------------- -->
+
+<!-- %                  Epígrafe  (OPCIONAL) -->
+
+<!-- % Comente as linhas abaixo se não quiser usar.-->
+
+```{=tex}
+\begin{epigrafe}
+
+
+    
+    \vspace*{\fill}
+    \begin{flushright}
+        ``O senhor é meu pastor e nada me faltará!'' \\
+                                 (Salmo 23)
+    \end{flushright}
+\end{epigrafe}
+```
+<!-- %%------------------------------------------------------------------------ -->
+
+<!-- %                           RESUMOS -->
+
+<!-- % O resumo em português é obrigatório, seguido da sua versão em outro  -->
+
+<!-- % idioma, que pode ser inglês (mais comum), francês ou espanhol. -->
+
+\setlength{\absparsep}{18pt} <!-- % ajusta espaçamento de parág. do resumo -->
+
+```{=tex}
+\begin{resumo}
+
+
+A Síndrome Respiratória Aguda Grave (SRAG) é uma condição médica grave que afeta o sistema respiratório, causando sintomas como febre alta, tosse, falta de ar e dificuldade respiratória. Sua etiologia pode ser diversa, incluindo o coronavírus SARS-CoV-2, responsável pela COVID-19. A SRAG pode levar a complicações graves, como pneumonia e insuficiência respiratória, demandando cuidados hospitalares intensivos e, em casos mais graves, pode resultar em insuficiência de múltiplos órgãos e morte. Este trabalho teve como objetivo demonstrar algumas das principais técnicas de \textit{Machine Learning} para a classificação multiclasse de SRAG, visando aprimorar a capacidade de previsão da síndrome. Para isso, foram utilizados diferentes modelos de classificação, voltados especificamente para classificação multiclasse. Os resultados obtidos revelaram que o modelo XGBoost se destacou, alcançando uma performance geral de 83\%. Esse modelo apresentou excelentes resultados na classificação de SRAG por influenza, SRAG por Covid e outras SRAGs relacionadas a vírus respiratórios. No entanto, identificou-se um desempenho razoável nas classes 3 e 4, que representam SRAG por outros agentes etiológicos e um tipo não especificado de SRAG, respectivamente. Esses resultados reforçam a importância do uso de técnicas de \textit{Machine Learning} na análise da SRAG, contribuindo para melhorar a capacidade de previsão e diagnóstico da síndrome. Futuras pesquisas podem se concentrar em aprimorar o desempenho do modelo nas classes mais desafiadoras, buscando aperfeiçoar a aplicação prática dessas técnicas na saúde pública e na medicina.
+ 
+    \textbf{Palavras-chave}: previsão de SRAG; saúde pública;  modelos de aprendizado de máquina; classificação multiclasse.
+    % Número máximo de 4 palavras-chave.
+\end{resumo}
+```
+<!-- % resumo em inglês(OBRIGATÓRIO) -->
+
+```{=tex}
+\begin{resumo}[Abstract]
+    \begin{otherlanguage*}{english}
+%Severe Acute Respiratory Syndrome (SARS) is a serious medical condition that affects the lungs and the respiratory system. It is characterized by symptoms such as high fever, cough, shortness of breath, and difficulty breathing. SARS can be caused by a variety of viruses, including the SARS-CoV-2 coronavirus, which causes COVID-19. Additionally, it is a condition that can lead to severe complications such as pneumonia and respiratory failure, requiring hospitalization and intensive care. In severe cases, the syndrome can result in multiple organ failure and death. SARS is particularly concerning due to its ability to easily spread from person to person. During epidemic outbreaks, such as the COVID-19 pandemic, SARS can rapidly spread, putting a large number of people at risk of contracting the disease. Diagnosis is based on the assessment of clinical symptoms, lung imaging tests, and laboratory tests to identify the causative agent. The use of machine learning models to analyze Severe Acute Respiratory Syndrome (SARS) can bring significant benefits in the context of public health and medicine. Here are some reasons why these models are important: early detection, severity classification, prognosis, and treatment, among others.
+
+
+Acute Severe Respiratory Syndrome (ASRS) is a severe medical condition that affects the respiratory system, causing symptoms such as high fever, cough, shortness of breath, and respiratory distress. Its etiology can be diverse, including the SARS-CoV-2 coronavirus, responsible for COVID-19. ASRS can lead to serious complications such as pneumonia and respiratory failure, requiring intensive hospital care and, in severe cases, can result in multiple organ failure and death. This study aimed to demonstrate some of the main machine learning techniques for multiclass classification of ASRS, aiming to improve the syndrome's predictive capability. Different classification models specifically tailored for multiclass classification were used to achieve this goal. The results obtained revealed that the XGBoost model stood out, achieving an overall performance of 83\%. This model showed excellent results in classifying ASRS caused by influenza, ASRS caused by Covid, and other ASRS related to respiratory viruses. However, reasonable performance was identified in classes 3 and 4, representing ASRS caused by other etiological agents and an unspecified type of ASRS, respectively. These results reinforce the importance of using machine learning techniques in ASRS analysis, contributing to improving the predictive capability and diagnosis of the syndrome. Future research can focus on enhancing the model's performance in the more challenging classes, seeking to refine the practical application of these techniques in public health and medicine.
+        
+        %\textbf{Keywords}: ASRS prediction. Machine Learning. Multiclassification.
+        
+        \textbf{Keywords}: ASRS prediction; public health; machine learning models; multiclass classification.
+    \end{otherlanguage*}
+\end{resumo}
+\vspace{\onelineskip}
+```
+<!-- %%----------------------------------------------------------------------- -->
+
+<!-- %              inserir lista de ilustrações (OPCIONAL) -->
+
+<!-- % Comente as linhas abaixo se não quiser usar. -->
+
+```{=tex}
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+```
+<!-- %%----------------------------------------------------------------------- -->
+
+<!-- %              inserir lista de tabelas (OPCIONAL) -->
+
+<!-- % Comente as linhas abaixo se não quiser usar. -->
+
+```{=tex}
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+```
+<!-- %%----------------------------------------------------------------------- -->
+
+<!-- %           Inserir o Sumario -->
+
+```{=tex}
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+```
+<!-- %%----------------------------------------------------------------------- -->
+
+<!-- %        ELEMENTOS TEXTUAIS -->
+
+\textual
+
+\setcounter{page}{12}
+
+<!-- %%----------------------------------------------------------------------- -->
+
+<!-- %                             Introdução -->
+
+\chapter{Introdução}
+
+A Síndrome Respiratória Aguda Grave (SRAG), é condição clínica caracterizada por sintomas respiratórios graves que exigem hospitalização e pode ser causada por uma variedade de agentes infecciosos, como vírus, bactérias ou fungos. Ela geralmente se manifesta como uma infecção do trato respiratório inferior, afetando os pulmões e causando sintomas como febre alta, tosse persistente, falta de ar, dor no peito e dificuldade respiratória. Em casos mais graves, a SRAG pode levar à insuficiência respiratória e exigir suporte ventilatório. De acordo com \citeonline{minsaude} são sintomas do SARGS: indivíduo com síndrome gripal (SG) que apresente: dispneia/desconforto respiratório ou pressão ou dor persistente no tórax ou saturação de oxigênio (O2) menor que 95% em ar ambiente ou coloração azulada (cianose) dos lábios ou rosto. Vale salientar, no entanto, que nem todos os casos da síndrome são explicados pela infecção por Sars-CoV-2, pois, como mencionado, outras infecções respiratórias podem desencadear o problema \cite{brasilescola}.
+
+Segundo \citeonline{juca}, nos últimos anos, o surgimento da Covid-19 e o aumento no número de casos de gripe geraram uma atmosfera de medo e incertezas. Essa situação é agravada pela semelhança entre os sintomas de diferentes síndromes respiratórias graves, tornando a classificação e o diagnóstico um desafio para os profissionais de saúde. Muitas dessas síndromes compartilham sintomas comuns, como febre, tosse, falta de ar e dor no peito, resultando em uma sobreposição de características clínicas que pode dificultar a identificação precisa da doença em questão.
+
+A importância do \textit{Machine Learning} vem crescendo nos últimos anos, impulsionada pelo aumento na disponibilidade de dados, pela evolução dos algoritmos de aprendizagem e pelo avanço da capacidade de processamento dos computadores. Com isso, tornou-se possível realizar análises cada vez mais sofisticadas e precisas em áreas como finanças, marketing, saúde, entre outras. O uso de técnicas de \textit{Machine Learning} proporciona uma abordagem inovadora para lidar com a complexidade dos dados relacionados à SRAG, permitindo que padrões sejam identificados. Essas técnicas explorarão os dados existentes, como informações clínicas, resultados de exames laboratoriais e históricos médicos, a fim de construir um modelo preditivo capaz de auxiliar na identificação correta do tipo de SRAG.
+
+Nesta monografia, o objetivo é desenvolver um modelo de classificação eficaz utilizando técnicas de aprendizado de máquina \textit{Machine Learning} para identificar e classificar corretamente os diferentes tipos de Síndrome Respiratória Aguda Grave (SRAG). Para alcançar esse objetivo, será empregado o uso de algoritmos de \textit{Machine Learning} que analisarão dados clínicos e epidemiológicos relevantes. O intuito é criar um modelo preditivo capaz de distinguir entre os tipos específicos de SRAG de forma mais precisa e eficiente.
+
+\chapter{Material e Métodos}
+
+Será apresentada uma descrição detalhada dos materiais utilizados, bem como os procedimentos adotados para a coleta e preparação dos dados. Além disso, serão explicadas as principais técnicas de \textit{Machine Learning} empregadas nas análises do problema apresentado nesta monografia, voltadas a classificação multiclasse, abrangendo algumas de suas aplicações específicas nesse contexto desafiador.
+
+\section{Material}
+
+Para a análise, foi utilizado um banco de dados de acesso livre e gratuito do OpenDataSUS (SARG\footnote[1]{https://opendatasus.saude.gov.br/sq/dataset/srag-2021-a-2023}) está relacionada aos atributos de pacientes com algum tipo de síndrome gripal e refere-se ao período de 2021 a 2023. O conjunto de dados é formado de 468.994 observações e 166 variáveis: sexo, idade, ID do hospital, entre outras. O dicionário completo pode ser acessado no site oficial do OpenDataSUS ou no anexo desta monografia que contém as descrições das variáveis utilizadas. Na Tabela\~\ref{tab:variaveis} pode-se observar a descrição de algumas variáveis utilizadas no modelo, incluindo a variável resposta:
+
+<!-- \pagestyle{plain} -->
+
+```{=tex}
+\begin{table}[H]
+\caption[Descrição das Variáveis do SRAG Open Data SUS]{Descrição das Variáveis do SRAG Open Data SUS}
+\centering
+\begin{tabular}{p{4cm}p{2cm}p{3cm}p{7cm}}
+\hline
+\textbf{Variável} & \textbf{Tipo} & \textbf{Categoria} & \textbf{Descrição} \\
+\hline
+AN\_PARA3  & Categórica & 1 - marcado pelo usuário \newline Vazio - não marcado & Resultado do Teste Antigênico. Parainfluenza 3. \\
+\hline
+AN\_ADENO  & Categórica & 1 - marcado pelo usuário \newline Vazio - não marcado & Resultado do Teste Antigênico. Adenovírus. \\
+\hline
+AN\_OUTRO   & Categórica & 1 - marcado pelo usuário \newline Vazio - não marcado & Resultado do Teste Antigênico. Outro vírus respiratório. \\
+\hline
+CLASSI\_FIN  & Categórica & 1 - SRAG por influenza \newline
+2 - SRAG por outro vírus 
+respiratório \newline
+3 - SRAG por outro agente     
+etiológico, qual: \newline
+4 - SRAG não especificado \newline 
+5 - SRAG por covid-19 pelo usuário & Diagnóstico final do
+caso. \\
+\hline
+\end{tabular}
+\label{tab:variaveis}
+\end{table}
+\begin{flushleft}
+\vspace{-1em}
+\centering
+\textbf{Fonte:} Elaborado pelo Autor, 2023
+\end{flushleft}
+```
+A variável resposta representa a classificação final do caso, como sendo:
+
+```{=tex}
+\begin{itemize}
+\item 1-SRAG por influenza;  
+\item 2-SRAG por outro vírus
+respiratório;
+\item 3-SRAG por outro agente etiológico, qual;
+\item 4-SRAG não especificado;
+\item 5-SRAG por covid-19.
+\end{itemize}
+```
+\pagebreak
+
+\subsection{METODOS}
+
+\hspace{1cm}
+
+O ambiente computacional estatístico utilizado para a análise e limpeza dos dados foi o \textit{software R} \cite{R-Core-Team} e para a geração dos modelos foi utilizado a \textit{linguagem python} \cite{python}, os scripts e os demais arquivos utilizados nas análises desse projeto pode ser acessado através do seguinte repositório do github: \href{ https://github.com/JosefersonBarreto/Prediction_of_SARGS_by_multiclassification}{Prediction\_of\_SARGS\_by\_multiclassification}.
+
+\section{Métodos}
+
+<!-- %Em uma abordagem inicial, foi feita a limpeza e, posteriormente, realizamos a análise exploratória nos dados a fim de conhecer melhor nosso conjunto de dados e identificar possíveis padrões.  -->
+
+\hspace{1cm}
+
+Inicialmente foi feita a limpeza dos dados, visando garantir a qualidade e confiabilidade do conjunto de dados utilizado. Em seguida, é realizada uma análise exploratória detalhada, permitindo uma melhor compreensão do nosso conjunto de dados e a identificação de possíveis padrões relevantes. A partir disso, foram utilizadas várias técnicas de \textit{Machine Learning} e Estatística, tais como: métodos de reamostragem e subamostragem, seleção de atributos e alguns modelos de \textit{Machine Learning} para classificação multiclasse. Por último, foi realizada a comparação de desempenho entre os modelos.
+
+\hspace{1cm}
+
+No método de subamostragem, foi utilizado a amostragem aleatória, onde instâncias(amostras) aleatórias são selecionadas da classe majoritária para corresponder ao número de amostras da classe minoritária. Isso reduz o tamanho da classe majoritária, equilibrando as proporções das classes. Por último, foram criados vários modelos de \textit{Machine Learning} para classificação multiclasse, usando as técnicas antes descritas, a fim de comparar seus resultados e verificar qual modelo foi capaz de classificar as classes corretamente com maior exatidão e que será o possível candidato a implementação. Além disso, foram feitas a Curva Roc para avaliação do modelo com melhores métricas e o gráfico de importância de atributos Shapley que mostrará o quanto cada covariável é importante para o modelo.
+
+\subsection{Hiperparâmetros}
+
+\hspace{1cm}
+
+Segundo @hiper, alguns algoritmos de classificação possuem parâmetros que precisam ser configurados antes de executá-los para obtenção de um resultado mais satisfatórios. Os hiperparâmetros são parâmetros ajustáveis externamente que influenciam o comportamento e o desempenho de um modelo de aprendizado de máquina, mas não são aprendidos a partir dos dados durante o processo de treinamento. Ao contrário dos parâmetros do modelo, que são ajustados internamente durante o treinamento, os hiperparâmetros são definidos antes do treinamento e afetam como o modelo é treinado e como ele realiza as previsões. Os hiperparâmetros determinam as configurações e as características do modelo, permitindo que você personalize e ajuste o desempenho conforme as necessidades específicas do problema e do conjunto de dados. Esses hiperparâmetros podem variar conforme o algoritmo e o tipo de modelo utilizado.
+
+\vspace{\onelineskip}
+
+<!-- % para fazer citações usar \citep{} -->
+
+```{=tex}
+\section{Árvore de Decisão}
+\vspace{\onelineskip}
+```
+<!-- %\begin{document} -->
+
+\hspace{1cm}
+
+Segundo @arvore, uma árvore é uma coleção de elementos chamados nós, dentre os quais um é distinguido como uma raiz, juntamente com uma relação de “paternidade” que impõe uma estrutura hierárquica sobre os nós. Trata-se de um modelo que nos ajuda a tomar decisões com base em uma série de condições e critérios definidos. Sua representação gráfica, que se assemelha a uma árvore com nós e ramos, torna o processo de tomada de decisão mais visual e compreensível.
+
+\hspace{1cm}
+
+Imagine que estamos diante de um problema complexo que exige uma série de escolhas para chegar a um resultado desejado. A árvore de decisão nos ajuda a dividir esse problema em pequenas partes e nos guia por diferentes caminhos, com base em critérios específicos. Cada nó da árvore representa uma decisão que precisamos tomar, enquanto os ramos representam as possíveis alternativas que podemos seguir.
+
+```{=tex}
+\begin{figure}[H]
+  \centering
+   \caption[Funcionamento da Árvore de Decisão]{Funcionamento da Árvore de Decisão.}
+  
+```
+![](arvore.png)
+
+```{=tex}
+
+  \label{fig:funarvore}
+\end{figure}
+\begin{flushleft}
+\vspace{-2em}
+\centering
+\textbf{Fonte:} Elaborado pelo Autor, 2023
+\end{flushleft}
+```
+Neste exemplo, é apresentada uma estrutura básica de uma árvore de decisão. O nó raiz representa uma variável de interesse, enquanto os nós subsequentes representam diferentes condições ou critérios de decisão. Cada nó de decisão é conectado a dois ou mais nós de resultado, que representam as possíveis ações ou resultados decorrentes daquela condição específica. Nas árvores de decisão temos uma métrica chamada critério de decisão.
+
+\subsection{Critério de Decisão}
+
+\hspace{1cm}
+
+O critério em árvores de decisão é uma medida utilizada para determinar como os nós da árvore devem ser divididos durante a construção do modelo. O critério define a função de avaliação que determina qual divisão é considerada a melhor em termos de pureza das classes resultantes.
+
+\hspace{1cm}
+
+Existem diferentes critérios utilizados em árvores de decisão, sendo os mais comuns o índice de Gini (Gini impurity) e a entropia. Esses critérios medem a impureza dos dados em um nó da árvore e procuram dividir o nó para reduzir a impureza e aumentar a homogeneidade das classes nós filhos.
+
+\subsubsection{Índice de Gini}
+
+\hspace{1cm}
+
+O critério de Gini avalia a probabilidade de classificar incorretamente uma amostra aleatória com base na distribuição das classes em um nó. Ele mede a impureza dos dados, sendo que um valor de 0 indica que todas as amostras pertencem a uma única classe e um valor de 1 indica que as amostras estão igualmente distribuídas entre as classes. O índice de Gini pode ser obtido pela seguinte expressão:
+
+$$
+ \text{Gini}(p) = 1 - \sum_{i=1}^{K} p_i^2,
+$$
+
+\noindent onde, $p$ representa a distribuição de probabilidade das classes em um nó,\
+e $K$ é o número de classes. Para realizar o cálculo do índice de Gini, é necessário seguir alguns passos. Primeiramente, é preciso calcular o quadrado das probabilidades de cada classe, representadas por $p_i^2$. Em seguida, esses valores são somados. Por fim, o resultado dessa soma é subtraído de 1.
+
+\vspace{\onelineskip}
+
+\section{Suport Vector Machine}
+
+\vspace{\onelineskip}
+
+O objetivo do algoritmo da máquina de vetores de suporte (SVM –Support Vector Machine) é encontrar um hiperplano em um espaço N-dimensional (N -o número de recursos ou atributos) que classifica distintamente os pontos de dados, @datascienceacademy. Segundo @suport, é uma técnica de classificação que procura encontrar um hiperplano que particione os dados por seus rótulos de classe e ao mesmo tempo, evite o ajuste excessivo dos dados maximizando a margem da separação hiperplano. Na Figura \ref{fig:imagem1} podemos visualizar a definição do hiperplano:
+
+\vspace{1cm}
+
+```{=tex}
+\begin{figure}[H]
+  \centering
+    \caption[Otimização do Hiperplano]{Otimização do Hiperplano}
+ 
+ 
+ 
+ 
+```
+![](whatsap_SVM.jpeg)
+
+```{=tex}
+  \label{fig:imagem1}
+\end{figure}
+\begin{flushleft}
+\vspace{-1.5em}
+\centering
+\textbf{Fonte:} Data Science Academy(2022)
+\end{flushleft}
+```
+\vspace{1cm}
+
+\chapter{Resultados}
+
+Após a divisão dos dados em dados de espera e dados para treino e teste, no intuito de aumentar as informações sobre a classe minoritária (classe 3), então dividimos mais 50% dos dados de espera, filtramos os valores que são equivalentes a classe 3, uniremos o dataset(banco de dados) que ficou como base reduzida ao dataset filtrando com base na classe 3, após esse procedimento ficamos com a seguinte proporção dos dados:
+
+```{=tex}
+\begin{table}[H]
+\caption[Descrição da Proporção dos Dados]{Descrição da Proporção dos Dados}
+\centering
+```
+| Classe   | Proporção   |
+|----------|-------------|
+| 1        | 2,33%       |
+| 2        | 5,61%       |
+| 3        | 1,43%       |
+| 4        | 44,92%      |
+| 5        | 45,72%      |
+| -------- | ----------- |
+
+```{=tex}
+
+\label{tab:variaveis}
+\end{table}
+
+\begin{flushleft}
+\vspace{-1cm}
+\centering
+\textbf{Fonte:} Elaborado pelo Autor, 2023
+\end{flushleft}
+```
+\chapter{Conclusão}
+
+Neste trabalho foram demonstradas algumas das principais técnicas de machine learning para classificação multiclasse, visando aprimorar a capacidade de previsão de síndromes respiratórias agudas graves (SRAG). Ao longo da pesquisa, foram utilizados diferentes modelos de classificação, sendo o XGBoost o que apresentou melhores resultados em relação às métricas de classificação para as cinco classes analisadas. Essa abordagem permitiu uma performance geral de 83%, destacando-se especialmente na classificação de SRAG por influenza, SRAG por Covid, além das SRAGs por outros vírus respiratórios. No entanto, as classes 3 e 4 demonstraram apenas uma performance razoável, ficando ligeiramente acima do nível aleatório. Essa ocorrência pode ser atribuída a diversos fatores. Embora tenhamos realizado o balanceamento dos dados através do undersampling, equilibrando todas as classes, é possível que as classes 1, 2 e 5 tenham definições mais concretas de seus atributos. Em contraste, a classe 3 abrange a SRAG por outros agentes etiológicos, o que pode significar a existência de múltiplos agentes, impactando a distribuição dos atributos e dificultando sua classificação. De maneira similar, a classe 4 refere-se a um tipo de SRAG que não pôde ser especificado com base em seus atributos. Consequentemente, embora o modelo XGBoost tenha apresentado desempenho geral superior em relação aos demais modelos, é necessário considerar o aprimoramento das métricas nas classes 3 e 4. Para prosseguir com a implementação, é recomendável explorar outras técnicas de processamento de dados, bem como estratégias adicionais de balanceamento e ajustes no modelo. Melhorar o desempenho do modelo é crucial, especialmente considerando o contexto da área de saúde
+
+Após analisar a matriz de confusão do melhor modelo, notou-se que a maioria das predições incorretas das classes 3 e 4 estava concentrada em sua proximidade, indicando uma forte semelhança entre os atributos (características) dessas duas classes. Isso pode ter contribuído para as dificuldades em distingui-las corretamente e resultou em um número maior de classificações equivocadas entre elas. Com tudo, pode-se notar que, mesmo com as ressalvas, o modelo é capaz de prever com excelente performance a classificação de SRAG por influenza, SRAG por Covid, além das SRAGs por outros vírus respiratórios. Vale ressaltar que, quando estamos trabalhando em áreas como a saúde, é importante ter o menor erro possível, pois o erro pode custar vidas.
+
+<!-- %%----------------------------------------------------------------------- -->
+
+<!-- <!-- %                     ELEMENTOS PÓS-TEXTUAIS -->
+
+<!-- \postextual -->
+
+<!-- \usepackage{biblatex}  -->
+
+<!-- \bibliographystyle{plain}  -->
+
+<!-- %%----------------------------------------------------------------------- -->
+
+<!-- %                   Referências -->
+
+\chapter{refências}

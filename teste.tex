@@ -1,0 +1,683 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  12pt,
+  oneside,
+  a4paper,
+  chapter=TITLE,
+  english,brazil]{abntex2}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+%%-----------------------------------------------------------------------
+% O argumento chapter=TITLE define que todos os títulos de capítulos
+% saiam em caixa alta (maiúsculas). Se não quiser caixa alta, basta
+% remover este argumento.
+\documentclass[12pt,oneside,a4paper,chapter=TITLE,
+			  english,brazil]{abntex2}
+
+%\documentclass[12pt,oneside,a4paper,chapter=TITLE]{abntex2}
+
+
+%\documentclass[12pt,oneside,a4paper,chapter=TITLE]{abntex2}
+%%-----------------------------------------------------------------------
+% Carregando a padronização para a capa, contra-capa e folha de
+% assinaturas adotada pela UEPB
+\usepackage{TCC_UEPB}
+\usepackage{graphicx}
+\usepackage{sectsty}
+%\pagenumbering{arabic}
+%%-----------------------------------------------------------------------
+% Pacotes básicos 
+\usepackage{mathptmx}		% Usa a fonte Times New Roman
+\usepackage[T1]{fontenc}	% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}	% Cod. do doc. (conversão autom. dos acentos)
+\usepackage{lastpage}		% Usado pela Ficha catalográfica
+\usepackage{indentfirst}	% Indenta o primeiro parágrafo de cada seção.
+\usepackage{float}
+\usepackage{forest}
+\usepackage{color}			% Controle das cores
+\usepackage{graphicx}		% Inclusão de gráficos
+\usepackage{microtype} 		% para melhorias de justificação
+\usepackage{pdfpages}		% para a inclusão de documentos em PDF.
+\usepackage{multirow}       % VARIAS LINHAS NA TABELA
+\usepackage{colortbl}       % CORES NA TABELA
+\usepackage{hyperref}
+\usepackage{titlesec}
+%%------------------------------------------------------------------------
+% Pacotes adicionais, para definir ambientes para definição, teorema 
+% e axioma. Outros ambientes podem ser definidos da mesma forma...
+\usepackage{amssymb}     % qed
+\usepackage{amsthm}      % Teoremas
+\usepackage{amsmath}     % Para o ambiente align (alinhar equações)
+\usepackage{thmtools}    % Front end para amsthm (\declaretheorem)
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+%%-----------------------------------------------------------------------
+% Definição de ambientes para definição, teorema, etc...
+\declaretheorem[style=definition,name=Definição,qed=\textemdash]{definicao}
+\declaretheorem[style=plain,name=Teorema,qed=\textnormal{\textemdash}]{teorema}
+\declaretheorem[style=plain,name=Axioma,qed=\textnormal{\textemdash}]{axioma}
+\declaretheorem[style=plain,name=Lema,qed=\textnormal{\textemdash}]{lema}
+% Configuração para seções e subseções
+%\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% configurando seções 
+
+
+
+%%------------------------------------------------------------------------
+% Pacotes de citações
+%\usepackage[brazilian,hyperpageref]{backref} % Página citada na bibliog.
+%\usepackage[alf]{abntex2cite}				 % Citações padrão ABNT
+
+%\titlespacing{\chapter}{0pt}{*0}{*0}
+%\titlespacing{\section}{0pt}{*0}{*0}
+%%-----------------------------------------------------------------------
+%% CONFIGURAÇÕES DE PACOTES
+%%-----------------------------------------------------------------------
+
+\usepackage{fancyhdr}
+\usepackage[bottom=2cm,top=2cm]{geometry} % Ajusta as margens
+
+\pagestyle{plain} % Configura o estilo de página para plain
+
+\fancypagestyle{plain}{%
+  \fancyhf{} % Limpa todos os cabeçalhos e rodapés
+  \renewcommand{\headrulewidth}{0pt} % Remove a linha do cabeçalho
+  \fancyhead[R]{\raisebox{2cm}{\thepage}} % Ajusta a posição vertical (aumentado para -2cm)
+}
+%%-----------------------------------------------------------------------
+% Configurações do pacote backref Usado sem a opção hyperpageref
+% de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}   % Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+	Nenhuma citação no texto.%
+	\or
+	Citado na página #2.%
+	\else
+	Citado #1 vezes nas páginas #2.%
+	\fi}%
+
+
+%%----------------------------------------------------------------------
+% Configurações de aparência do PDF final
+\makeatletter
+\hypersetup{     % informações do PDF
+	pdftitle={\@title}, 
+	pdfauthor={\@author},
+	pdfsubject={\imprimirpreambulo},
+	colorlinks=true,   % false: box links; true: color links
+	linkcolor=black,   % color of internal links
+	citecolor=black,   % color of links to bibliography
+	filecolor=black,   % color of file links
+	urlcolor=black,    % color of url links
+	bookmarksdepth=4
+}
+\makeatother
+
+
+%%------------------------------------------------------------------
+% Cria uma nova série (de símbolos) para footnotes
+\newcounter{savefootnote}
+\newcounter{symfootnote}
+\newcommand{\symfootnote}[1]{%
+	\setcounter{savefootnote}{\value{footnote}}%
+	\setcounter{footnote}{\value{symfootnote}}%
+	\ifnum\value{footnote}>8\setcounter{footnote}{0}\fi%
+	\let\oldthefootnote=\thefootnote%
+	\renewcommand{\thefootnote}{\fnsymbol{footnote}}%
+	\footnote{#1}%
+	\let\thefootnote=\oldthefootnote%
+	\setcounter{symfootnote}{\value{footnote}}%
+	\setcounter{footnote}{\value{savefootnote}}%
+}
+
+
+% remove informações do  top das paginas 
+
+
+%\pagestyle{empty} 
+
+%%-----------------------------------------------------------------------
+% Informações de dados para CAPA, FOLHA DE ROSTO e FOLHA DE APROVAÇÃO
+\titulo{ PREDIÇÃO DA SÍNDROME RESPIRATÓRIA AGUDA GRAVE POR MEIO DE MULTICLASSIFICAÇÃO COM ALGORITMOS DE MACHINE LEARNING}   % Subtítulo apenas se houver
+\tituloestrangeiro{PREDICTION OF SEVERE ACUTE RESPIRATORY SYNDROME THROUGH MULTICLASSIFICATION USING MACHINE LEARNING ALGORITHMS} % Title (English - opcional)
+\autor{JOSEFERSON DA SILVA BARRETO}   % Digite seu nome aqui
+\local{Campina Grande - PB}
+\data{2023}                              % Na data coloque apenas o ano
+\orientador[Prof. Dr.]{%Ricardo Alves de Olinda & \\
+            Tiago Almeida de Oliveira} % Nome do orientador aqui
+%\coorientador[]{} % Coorientador (se tiver)
+
+%%-----------------------------------------------------------------------
+% Informações sobre campus, centro, depto e curso
+% \campus e \curso são obrigatórios e precisam ser preenchidos!!
+% Todos os demais são opcionais (para o LaTeX), pois note que o 
+% \preambulo é exigido pela Biblioteca na entrega do trabalho.
+\campus{Campus I - CAMPINA GRANDE}
+\centro{Centro de Ciências e Tecnologia}
+\depto{Departamento de Estatística}
+\curso{CURSO DE GRADUAÇÃO EM BACHARELADO EM ESTATÍSTICA}
+\tipotrabalho{Trabalho de Conclusão de Curso}
+\preambulo{
+  Trabalho de Conclusão de Curso apresentado ao curso de Bacharelado em Estatística do Departamento de Estatística do Centro de Ciências e Tecnologia da Universidade Estadual da Paraíba, como requisito parcial à obtenção do título de bacharel em Estatística.
+}
+
+
+%%-----------------------------------------------------------------------
+% compila o indice
+\makeindex
+
+\usepackage{pdfpages}
+
+%\pagestyle{plain}
+
+%%-----------------------------------------------------------------------
+%%      INÍCIO DO DOCUMENTO
+%%-----------------------------------------------------------------------
+
+\setlength{\absparsep}{18pt}
+%%
+%% ABNTeX2 customization (http://www.abntex.net.br) for 
+%% Universidade Estadual da Paraíba (UEPB).
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% The Current Maintainer of this work is Gustavo H. Esteves,
+%% e-mail: gesteves@servidor.uepb.edu.br
+%%
+%% Further information about abnTeX2 are available 
+%% on http://www.abntex.net.br
+%%
+
+% -----------------------------------------------------------
+% BEGIN OF CUSTOMIZATION FOR UNIVERSIDADE ESTADUAL DA PARAÍBA
+% -----------------------------------------------------------
+
+\ProvidesPackage{TCC_UEPB}[2021/02/26]
+
+
+
+% ----------------------------------------------------------
+
+% Definindo comandos para o Campus
+\newcommand{\campusN}{CAMPUS XX}
+\providecommand{\imprimircampusRotulo}{}
+\providecommand{\imprimircampus}{}
+\newcommand{\campus}[2][\campusN]%
+{\renewcommand{\imprimircampusRotulo}{#1}%
+	\renewcommand{\imprimircampus}{#2}}
+
+% Definindo comandos para o Centro
+\newcommand{\centroN}{CENTRO XX}
+\providecommand{\imprimircentroRotulo}{}
+\providecommand{\imprimircentro}{}
+\newcommand{\centro}[2][\centroN]%
+{\renewcommand{\imprimircentroRotulo}{#1}%
+	\renewcommand{\imprimircentro}{#2}}
+
+% Definindo comandos para o Depto
+\newcommand{\deptoN}{DEPARTAMENTO XX}
+\providecommand{\imprimirdeptoRotulo}{}
+\providecommand{\imprimirdepto}{}
+\newcommand{\depto}[2][\deptoN]%
+{\renewcommand{\imprimirdeptoRotulo}{#1}%
+	\renewcommand{\imprimirdepto}{#2}}
+
+% Definindo comandos para o curso
+\newcommand{\cursoN}{CURSO XXXXX}
+\providecommand{\imprimircursoRotulo}{}
+\providecommand{\imprimircurso}{}
+\newcommand{\curso}[2][\cursoN]%
+{\renewcommand{\imprimircursoRotulo}{#1}%
+	\renewcommand{\imprimircurso}{#2}}
+
+% Definindo comandos para os dois membros da banca e a data da defesa...
+\newcommand{\datadefesaD}{DD de MM de AAAA}
+\providecommand{\imprimirdatadefesaRotulo}{}
+\providecommand{\imprimirdatadefesa}{}
+\newcommand{\datadefesa}[2][\datadefesaD]%
+  {\renewcommand{\imprimirdatadefesaRotulo}{#1}%
+   \renewcommand{\imprimirdatadefesa}{#2}}
+
+
+\newcommand{\membroumname}{Membro um}
+\newcommand{\membrodoisname}{Membro dois}
+\newcommand{\membrotresname}{Membro três}
+
+% Comandos de dados - Membro da banca um
+\providecommand{\imprimirmembroumRotulo}{}
+\providecommand{\imprimirmembroum}{}
+\newcommand{\membroum}[2][\membroumname]%
+  {\renewcommand{\imprimirmembroumRotulo}{#1}%
+   \renewcommand{\imprimirmembroum}{#2}}
+   
+% Comandos de dados - Membro da banca dois
+\providecommand{\imprimirmembrodoisRotulo}{}
+\providecommand{\imprimirmembrodois}{}
+\newcommand{\membrodois}[2][\membrodoisname]%
+  {\renewcommand{\imprimirmembrodoisRotulo}{#1}%
+   \renewcommand{\imprimirmembrodois}{#2}}
+   
+% Comandos de dados - Membro da banca três
+\providecommand{\imprimirmembrotresRotulo}{}
+\providecommand{\imprimirmembrotres}{}
+\newcommand{\membrotres}[2][\membrotresname]%
+  {\renewcommand{\imprimirmembrotresRotulo}{#1}%
+   \renewcommand{\imprimirmembrotres}{#2}}
+
+
+% Remove as serifas do texto
+\renewcommand{\sfdefault}{\rmdefault}
+
+
+% ----------------------------------------------------------
+% alterando a capa
+\renewcommand{\imprimircapa}{
+  \begin{capa}
+    \center
+    \ABNTEXchapterfont \bfseries
+    \includegraphics[width=1.5cm]{logo_UEPB} 
+    
+    \MakeUppercase{Universidade Estadual da Paraíba} \\
+    \MakeUppercase{\imprimircampus} \\
+    \abntex@ifnotempty{\imprimircentro}{\MakeUppercase{\imprimircentro} \\}
+    \abntex@ifnotempty{\imprimirdepto}{\MakeUppercase{\imprimirdepto} \\}
+    \MakeUppercase{\imprimircurso} \\
+        
+	\vfill
+    \MakeUppercase{\imprimirautor}
+    
+    \vfill
+    \MakeUppercase{\imprimirtitulo}
+
+    \vfill    
+    \MakeUppercase{\imprimirlocal} \\
+    \MakeUppercase{\imprimirdata}
+    
+    \vspace*{1cm}
+  \end{capa}
+}
+
+
+
+% ----------------------------------------------------------
+% folha de rosto 
+
+\makeatletter
+
+\renewcommand{\folhaderostocontent}{
+\begin{center}
+    
+    \vspace*{1cm}
+    
+{\ABNTEXchapterfont\MakeUppercase{\imprimirautor}}
+
+%\vspace*{\fill}\vspace*{\fill}
+\vspace*{4cm}
+
+\begin{center}
+\ABNTEXchapterfont\bfseries\MakeUppercase{\imprimirtitulo}
+\end{center}
+
+%\vspace*{\fill}
+\vspace*{1cm}
+
+\abntex@ifnotempty{\imprimirpreambulo}{%
+  \hspace{.45\textwidth}
+  \begin{minipage}{.5\textwidth}
+  \ABNTEXchapterfont\SingleSpacing
+  \imprimirpreambulo
+  \end{minipage}%
+  %\vspace*{\fill}
+}%
+
+\vspace*{1.5cm}
+
+{\ABNTEXchapterfont\bfseries Orientador:} {\ABNTEXchapterfont\imprimirorientadorRotulo~\imprimirorientador\par}
+
+\abntex@ifnotempty{\imprimircoorientador}{%
+  {\ABNTEXchapterfont\bfseries Coorientador:} {\ABNTEXchapterfont\imprimircoorientadorRotulo~\imprimircoorientador}%
+}%
+
+\vspace*{\fill}
+
+{\ABNTEXchapterfont\bfseries \MakeUppercase{\imprimirlocal} \\
+   \MakeUppercase{\imprimirdata}}
+
+\vspace*{1cm}
+\end{center}
+}
+
+\makeatother
+
+
+
+
+
+% ----------------------------------------------------------
+% folha de aprovação
+
+\makeatletter
+
+\newcommand{\folhadeaprovacaoUEPB}{
+	\begin{folhadeaprovacao}
+		\ABNTEXchapterfont
+		\begin{center}
+			\MakeUppercase{\imprimirautor}
+			
+			\vspace*{\fill}\vspace*{\fill}
+			\begin{center}
+				\MakeUppercase{\imprimirtitulo}
+			\end{center}
+			\vspace*{\fill}
+			
+			\hspace{.45\textwidth}
+			\begin{minipage}{.5\textwidth}
+				\SingleSpacing\imprimirpreambulo
+			\end{minipage}%
+			%\vspace*{\fill}
+			\vspace*{1cm}
+		\end{center}
+		
+		\vfill
+		
+		Trabalho aprovado em \imprimirdatadefesa.
+		
+		\vfill
+		
+		\begin{center}
+		{\bfseries BANCA EXAMINADORA}
+		\end{center}
+		
+		\assinatura{\imprimirmembroumRotulo~\imprimirmembroum}
+		\assinatura{\imprimirmembrodoisRotulo~\imprimirmembrodois}
+		\assinatura{\imprimirmembrotresRotulo~\imprimirmembrotres}
+		
+		\vspace*{1cm}
+		
+		\vfill
+				
+	\end{folhadeaprovacao}
+}
+
+
+%------------------------------------------------------------------------
+% Alterando o tamanho padrão das fontes de títulos de capítulos, etc
+\renewcommand{\ABNTEXchapterfontsize}{\bfseries\normalsize}
+\renewcommand{\ABNTEXsectionfontsize}{\bfseries\normalsize}
+\renewcommand{\ABNTEXsubsectionfontsize}{\itshape\bfseries\normalsize}
+\renewcommand{\ABNTEXsubsubsectionfontsize}{\itshape\normalsize}
+\renewcommand{\ABNTEXsubsubsubsectionfontsize}{\normalsize}
+
+
+%------------------------------------------------------------------------
+% Organizando o padrao de impressão do sumário
+\renewcommand{\cftsubsectionfont}{\itshape\bfseries}
+\renewcommand{\cftsubsubsectionfont}{\itshape}
+\renewcommand{\cftparagraphfont}{\normalsize}
+
+
+%------------------------------------------------------------------------
+% Ajusta o tamanho do parágrafo
+\setlength{\parindent}{1.25cm}
+
+
+%------------------------------------------------------------------------
+% Espaçamento entre um parágrafo e outro
+\setlength{\parskip}{0cm}  % tente também \onelineskip
+
+
+%------------------------------------------------------------------------
+% Ajusta espaçamento depois dos títulos de capítulo
+\setlength\afterchapskip{\onelineskip}
+
+
+% ----------------------------------------------------------
+%   END OF CUSTOMIZATION FOR UNIVERSIDADE ESTADUAL DA PARAÍBA
+% ----------------------------------------------------------
+\usepackage{eplain}
+\usepackage{easy-todo}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={My document},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{My document}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\subsection{Quarto}\label{quarto}
+
+Quarto enables you to weave together content and executable code into a
+finished document. To learn more about Quarto see
+\url{https://quarto.org}.
+
+\subsection{Running Code}\label{running-code}
+
+When you click the \textbf{Render} button a document will be generated
+that includes both content and the output of embedded code. You can
+embed code like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1} \SpecialCharTok{+} \DecValTok{1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 2
+\end{verbatim}
+
+You can add options to executable code like this
+
+\begin{verbatim}
+[1] 4
+\end{verbatim}
+
+The \texttt{echo:\ false} option disables the printing of code (only
+output is displayed).
+
+\begin{longtable}[]{@{}lll@{}}
+\caption{minha tabela}\tabularnewline
+\toprule\noalign{}
+Col1 & Col2 & Col3 \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Col1 & Col2 & Col3 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & 5 & 8 \\
+4 & 6 & 8 \\
+6 & 8 & u \\
+\end{longtable}
+
+
+
+\end{document}
